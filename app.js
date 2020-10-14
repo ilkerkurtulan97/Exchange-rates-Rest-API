@@ -1,0 +1,27 @@
+document.getElementById("change").addEventListener("click",change);
+
+
+function change(){
+
+    const xhr = new XMLHttpRequest();
+
+    //GET Request yapacağımız için Rest API kullandım.
+    xhr.open("GET","https://api.exchangeratesapi.io/latest",true);
+
+    xhr.onload = function(){
+        if(this.status){
+
+            const response = JSON.parse(this.responseText);
+
+            //console.log(this.responseText);
+
+            const rate = response.rates.TRY
+            const amount = Number(document.getElementById("amount").value);
+            document.getElementById("tl").value = amount * rate;
+        }
+    }
+
+    xhr.send();
+
+
+}
